@@ -302,6 +302,8 @@ export default function Home() {
             <span>BoDiGi™</span>
             <span>AURA™</span>
             <span>BOLTZ™</span>
+            <span className="hidden md:inline">|</span>
+            <a href="https://www.linkedin.com/company/bobbie-digital" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors font-bold">LinkedIn</a>
           </div>
           <div>Built with care — support@bodigi-digital.com</div>
         </div>
