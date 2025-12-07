@@ -33,9 +33,11 @@ export default function Home() {
             <a href="#pricing" className="hover:text-primary hover:underline decoration-2 underline-offset-4 transition-all">Pricing</a>
             <a href="#about" className="hover:text-primary hover:underline decoration-2 underline-offset-4 transition-all">About</a>
             <a href="#contact" className="hover:text-primary hover:underline decoration-2 underline-offset-4 transition-all">Contact</a>
-            <Button variant="default" className="font-bold border-2 border-border neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-x-[4px] active:translate-y-[4px]">
-              Sign In
-            </Button>
+            <a href="https://bodigi.site">
+              <Button variant="default" className="font-bold border-2 border-border neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all active:translate-x-[4px] active:translate-y-[4px]">
+                Sign In
+              </Button>
+            </a>
           </nav>
 
           <button className="md:hidden p-2 border-2 border-border neo-shadow active:shadow-none transition-all" onClick={toggleMenu}>
@@ -51,7 +53,9 @@ export default function Home() {
               <a href="#pricing" className="hover:text-primary" onClick={toggleMenu}>Pricing</a>
               <a href="#about" className="hover:text-primary" onClick={toggleMenu}>About</a>
               <a href="#contact" className="hover:text-primary" onClick={toggleMenu}>Contact</a>
-              <Button className="w-full font-bold border-2 border-border neo-shadow">Sign In</Button>
+              <a href="https://bodigi.site" className="w-full">
+                <Button className="w-full font-bold border-2 border-border neo-shadow">Sign In</Button>
+              </a>
             </nav>
           </div>
         )}
@@ -74,9 +78,11 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="text-lg font-bold border-2 border-border neo-shadow-lg hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all bg-primary text-primary-foreground h-14 px-8">
-                  Get Started — Free <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                <a href="https://w2b-bobbiedigital.base44.app">
+                  <Button size="lg" className="text-lg font-bold border-2 border-border neo-shadow-lg hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all bg-primary text-primary-foreground h-14 px-8">
+                    Get Started — Free <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </a>
                 <Button variant="outline" size="lg" className="text-lg font-bold border-2 border-border neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all bg-white h-14 px-8">
                   Request Demo
                 </Button>
@@ -190,7 +196,9 @@ export default function Home() {
                   <li className="flex items-center gap-2"><Check className="h-5 w-5 text-green-600" /> Basic AI templates</li>
                   <li className="flex items-center gap-2"><Check className="h-5 w-5 text-green-600" /> Email onboarding</li>
                 </ul>
-                <Button variant="outline" className="w-full border-2 border-gray-900 font-bold hover:bg-gray-100">Start for Free</Button>
+                <a href="https://w2b-bobbiedigital.base44.app" className="w-full">
+                  <Button variant="outline" className="w-full border-2 border-gray-900 font-bold hover:bg-gray-100">Start for Free</Button>
+                </a>
               </div>
 
               {/* Pro Plan */}
@@ -204,7 +212,9 @@ export default function Home() {
                   <li className="flex items-center gap-2"><Check className="h-5 w-5 text-white" /> API Access</li>
                   <li className="flex items-center gap-2"><Check className="h-5 w-5 text-white" /> Priority support</li>
                 </ul>
-                <Button className="w-full bg-white text-primary font-bold border-2 border-transparent hover:bg-gray-100 hover:border-white">Start Pro</Button>
+                <a href="https://w2b-bobbiedigital.base44.app" className="w-full">
+                  <Button className="w-full bg-white text-primary font-bold border-2 border-transparent hover:bg-gray-100 hover:border-white">Start Pro</Button>
+                </a>
               </div>
 
               {/* Unlimited Plan */}
@@ -216,7 +226,9 @@ export default function Home() {
                   <li className="flex items-center gap-2"><Check className="h-5 w-5 text-green-600" /> Dedicated onboarding</li>
                   <li className="flex items-center gap-2"><Check className="h-5 w-5 text-green-600" /> SLA & premium integrations</li>
                 </ul>
-                <Button variant="outline" className="w-full border-2 border-gray-900 font-bold hover:bg-gray-100">Get Unlimited</Button>
+                <a href="https://w2b-bobbiedigital.base44.app" className="w-full">
+                  <Button variant="outline" className="w-full border-2 border-gray-900 font-bold hover:bg-gray-100">Get Unlimited</Button>
+                </a>
               </div>
             </div>
           </div>
