@@ -251,7 +251,7 @@ export default function Home() {
               <div>
                 <h2 className="text-4xl font-display font-black mb-6">GET IN TOUCH</h2>
                 <p className="text-xl text-muted-foreground mb-8">
-                  For partnerships, demos, and press — email <a href="mailto:marketing-support@bobbiedigital.com" className="text-primary font-bold hover:underline">marketing-support@bobbiedigital.com</a>
+                  For partnerships, demos, and press — email <a href="mailto:support@bodigi-digital.com" className="text-primary font-bold hover:underline">support@bodigi-digital.com</a>
                 </p>
 
                 <div className="space-y-6">
@@ -303,7 +303,7 @@ export default function Home() {
             <span>AURA™</span>
             <span>BOLTZ™</span>
           </div>
-          <div>Built with care — marketing-support@bobbiedigital.com</div>
+          <div>Built with care — support@bodigi-digital.com</div>
         </div>
       </footer>
     </div>
