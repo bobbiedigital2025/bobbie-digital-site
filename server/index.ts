@@ -8,6 +8,10 @@ const __dirname = path.dirname(__filename);
 
 // Security configuration
 const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(",") || [
+  "http://bobbiedigital.com",
+  "https://bobbiedigital.com",
+  "http://www.bobbiedigital.com",
+  "https://www.bobbiedigital.com",
   "http://www.bodigi.site",
   "https://www.bodigi.site",
   "http://www.w2b.base44.app",
@@ -47,7 +51,7 @@ async function startServer() {
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com data:",
       "img-src 'self' data: https: blob:",
-      "connect-src 'self' http://www.bodigi.site https://www.bodigi.site http://www.w2b.base44.app https://www.w2b.base44.app https://maps.googleapis.com",
+      "connect-src 'self' http://bobbiedigital.com https://bobbiedigital.com http://www.bobbiedigital.com https://www.bobbiedigital.com http://www.bodigi.site https://www.bodigi.site http://www.w2b.base44.app https://www.w2b.base44.app https://maps.googleapis.com",
       "frame-src 'self'",
       "object-src 'none'",
       "base-uri 'self'",

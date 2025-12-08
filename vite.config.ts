@@ -47,6 +47,8 @@ export default defineConfig({
       ".manus-asia.computer",
       ".manuscomputer.ai",
       ".manusvm.computer",
+      "bobbiedigital.com",
+      ".bobbiedigital.com",
       "bodigi.site",
       ".bodigi.site",
       "w2b.base44.app",
@@ -56,7 +58,7 @@ export default defineConfig({
     ],
     cors: {
       origin: process.env.NODE_ENV === "production" 
-        ? ["http://www.bodigi.site", "https://www.bodigi.site", "http://www.w2b.base44.app", "https://www.w2b.base44.app"]
+        ? ["http://bobbiedigital.com", "https://bobbiedigital.com", "http://www.bobbiedigital.com", "https://www.bobbiedigital.com", "http://www.bodigi.site", "https://www.bodigi.site", "http://www.w2b.base44.app", "https://www.w2b.base44.app"]
         : true,
       credentials: true,
     },
