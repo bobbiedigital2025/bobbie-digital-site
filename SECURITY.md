@@ -59,7 +59,7 @@ Create a `.env` file based on `.env.example`:
 ```bash
 # Required for production
 NODE_ENV=production
-ALLOWED_ORIGINS=https://bodigi.site,https://w2b.bobbiedigital.base44.app
+ALLOWED_ORIGINS=http://www.bodigi.site,https://www.bodigi.site,http://www.w2b.base44.app,https://www.w2b.base44.app
 
 # OAuth Configuration
 OAUTH_CLIENT_ID=your-client-id
@@ -74,8 +74,8 @@ RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX_REQUESTS=100
 
 # Contact Information
-CONTACT_EMAIL=bobbiegray@bodigi.site
-CONTACT_PHONE=937303
+CONTACT_EMAIL=support@bodigi-digital.com
+CONTACT_PHONE=(937)303-1858
 ```
 
 ### Deployment Checklist
@@ -92,8 +92,8 @@ CONTACT_PHONE=937303
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please email: **bobbiegray@bodigi.site**
-Phone: **937303**
+If you discover a security vulnerability, please email: **support@bodigi-digital.com**
+Phone: **(937)303-1858**
 
 Please include:
 - Description of the vulnerability
@@ -105,10 +105,10 @@ Please include:
 
 ## Contact Information
 
-- **Email:** bobbiegray@bodigi.site
-- **Phone:** 937303
-- **Website:** https://bodigi.site
-- **W2B Platform:** https://w2b.bobbiedigital.base44.app
+- **Email:** support@bodigi-digital.com
+- **Phone:** (937)303-1858
+- **BoDiGi App:** http://www.bodigi.site (Fully automated small business builder)
+- **Where_2_Begin App:** http://www.w2b.base44.app (Organization and goal tracking app)
 
 ## Security Updates
 

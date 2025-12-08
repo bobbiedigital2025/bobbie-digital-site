@@ -27,7 +27,7 @@ nano .env
 **Required values:**
 ```env
 NODE_ENV=production
-ALLOWED_ORIGINS=https://bodigi.site,https://w2b.bobbiedigital.base44.app
+ALLOWED_ORIGINS=http://www.bodigi.site,https://www.bodigi.site,http://www.w2b.base44.app,https://www.w2b.base44.app
 ```
 
 ### Step 2: Deploy (5 minutes)
@@ -48,7 +48,7 @@ NODE_ENV=production pnpm start
 
 ```bash
 # Test it works
-curl https://bodigi.site/health
+curl http://www.bodigi.site/health
 
 # Should return: {"status":"ok","timestamp":"..."}
 ```
@@ -66,14 +66,14 @@ curl https://bodigi.site/health
 
 ## 📞 Support
 
-- **Email**: bobbiegray@bodigi.site
-- **Phone**: 937303
+- **Email**: support@bodigi-digital.com
+- **Phone**: (937)303-1858
 - **Docs**: See DEPLOYMENT.md for detailed instructions
 
 ## 🎉 You're Ready!
 
 Your site is **production-ready** and **security-hardened** for:
-- https://bodigi.site
-- https://w2b.bobbiedigital.base44.app
+- BoDiGi: http://www.bodigi.site (Fully automated small business builder)
+- Where_2_Begin: http://www.w2b.base44.app (Organization and goal tracking app)
 
 Just configure `.env` and deploy! 🚀

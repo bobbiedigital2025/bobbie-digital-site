@@ -68,28 +68,36 @@
 
 ## 📞 Contact Information Added
 
-- **Email**: bobbiegray@bodigi.site
-- **Phone**: 937303
-- **Website**: https://bodigi.site
-- **W2B Platform**: https://w2b.bobbiedigital.base44.app
+- **Email**: support@bodigi-digital.com
+- **Phone**: (937)303-1858
+- **BoDiGi**: http://www.bodigi.site (Fully automated small business builder)
+- **Where_2_Begin**: http://www.w2b.base44.app (Organization and goal tracking app)
 
 API endpoint: `GET /api/contact` returns:
 ```json
 {
-  "email": "bobbiegray@bodigi.site",
-  "phone": "937303",
-  "websites": {
-    "main": "https://bodigi.site",
-    "w2b": "https://w2b.bobbiedigital.base44.app"
+  "email": "support@bodigi-digital.com",
+  "phone": "(937)303-1858",
+  "apps": {
+    "bodigi": {
+      "name": "BoDiGi",
+      "description": "Fully automated small business builder",
+      "url": "http://www.bodigi.site"
+    },
+    "where2begin": {
+      "name": "Where_2_Begin",
+      "description": "App for getting organized and tracking goals to stay productive in life",
+      "url": "http://www.w2b.base44.app"
+    }
   }
 }
 ```
 
-## 🚀 Deployment Domains
+## 🚀 Deployment Apps
 
 Configured for:
-1. **Primary**: `bodigi.site` (BODIGI.SITE)
-2. **W2B Platform**: `w2b.bobbiedigital.base44.app`
+1. **BoDiGi**: `www.bodigi.site` - Fully automated small business builder
+2. **Where_2_Begin**: `www.w2b.base44.app` - Organization and goal tracking app
 
 ## 📝 Next Steps for Deployment
 
@@ -100,7 +108,7 @@ Copy `.env.example` to `.env` and fill in:
 ```bash
 # Required
 NODE_ENV=production
-ALLOWED_ORIGINS=https://bodigi.site,https://w2b.bobbiedigital.base44.app
+ALLOWED_ORIGINS=http://www.bodigi.site,https://www.bodigi.site,http://www.w2b.base44.app,https://www.w2b.base44.app
 
 # OAuth (when ready)
 OAUTH_CLIENT_ID=your-client-id
@@ -259,5 +267,5 @@ Your site is now **production-ready** with:
 ---
 
 **Support Contact**:
-- Email: bobbiegray@bodigi.site
-- Phone: 937303
+- Email: support@bodigi-digital.com
+- Phone: (937)303-1858

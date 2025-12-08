@@ -8,8 +8,10 @@ const __dirname = path.dirname(__filename);
 
 // Security configuration
 const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS?.split(",") || [
-  "https://bodigi.site",
-  "https://w2b.bobbiedigital.base44.app",
+  "http://www.bodigi.site",
+  "https://www.bodigi.site",
+  "http://www.w2b.base44.app",
+  "https://www.w2b.base44.app",
 ];
 
 // Rate limiting store
@@ -45,7 +47,7 @@ async function startServer() {
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com data:",
       "img-src 'self' data: https: blob:",
-      "connect-src 'self' https://bodigi.site https://w2b.bobbiedigital.base44.app https://maps.googleapis.com",
+      "connect-src 'self' http://www.bodigi.site https://www.bodigi.site http://www.w2b.base44.app https://www.w2b.base44.app https://maps.googleapis.com",
       "frame-src 'self'",
       "object-src 'none'",
       "base-uri 'self'",
@@ -138,11 +140,19 @@ async function startServer() {
   // Contact information endpoint
   app.get("/api/contact", (_req, res) => {
     res.json({
-      email: process.env.CONTACT_EMAIL || "contact@bodigi.site",
-      phone: process.env.CONTACT_PHONE || "937303",
-      websites: {
-        main: process.env.APP_URL || "https://bodigi.site",
-        w2b: process.env.W2B_URL || "https://w2b.bobbiedigital.base44.app",
+      email: process.env.CONTACT_EMAIL || "support@bodigi-digital.com",
+      phone: process.env.CONTACT_PHONE || "(937)303-1858",
+      apps: {
+        bodigi: {
+          name: "BoDiGi",
+          description: "Fully automated small business builder",
+          url: process.env.BODIGI_URL || "http://www.bodigi.site",
+        },
+        where2begin: {
+          name: "Where_2_Begin",
+          description: "App for getting organized and tracking goals to stay productive in life",
+          url: process.env.W2B_URL || "http://www.w2b.base44.app",
+        },
       },
     });
   });
@@ -188,6 +198,7 @@ async function startServer() {
   server.listen(port, () => {
     console.log(`🔒 Secure server running on http://localhost:${port}/`);
     console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
+    console.log(`Contact: support@bodigi-digital.com | (937)303-1858`);
     console.log(`Allowed origins: ${ALLOWED_ORIGINS.join(", ")}`);
   });
 

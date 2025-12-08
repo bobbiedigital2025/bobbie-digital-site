@@ -49,14 +49,14 @@ export default defineConfig({
       ".manusvm.computer",
       "bodigi.site",
       ".bodigi.site",
-      "bobbiedigital.base44.app",
-      ".bobbiedigital.base44.app",
+      "w2b.base44.app",
+      ".w2b.base44.app",
       "localhost",
       "127.0.0.1",
     ],
     cors: {
       origin: process.env.NODE_ENV === "production" 
-        ? ["https://bodigi.site", "https://w2b.bobbiedigital.base44.app"]
+        ? ["http://www.bodigi.site", "https://www.bodigi.site", "http://www.w2b.base44.app", "https://www.w2b.base44.app"]
         : true,
       credentials: true,
     },

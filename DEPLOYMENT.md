@@ -2,7 +2,7 @@
 
 ## Security-Hardened Deployment
 
-This guide covers deploying the site to **bodigi.site** and **w2b.bobbiedigital.base44.app** with production-grade security.
+This guide covers deploying the site to **www.bodigi.site** and **www.w2b.base44.app** with production-grade security.
 
 ## Pre-Deployment Checklist
 
@@ -15,24 +15,24 @@ NODE_ENV=production
 PORT=3000
 
 # Allowed Origins (CORS)
-ALLOWED_ORIGINS=https://bodigi.site,https://w2b.bobbiedigital.base44.app
+ALLOWED_ORIGINS=http://www.bodigi.site,https://www.bodigi.site,http://www.w2b.base44.app,https://www.w2b.base44.app
 
 # Rate Limiting
 RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX_REQUESTS=100
 
 # Contact Information
-CONTACT_EMAIL=bobbiegray@bodigi.site
-CONTACT_PHONE=937303
+CONTACT_EMAIL=support@bodigi-digital.com
+CONTACT_PHONE=(937)303-1858
 
 # Application URLs
-APP_URL=https://bodigi.site
-W2B_URL=https://w2b.bobbiedigital.base44.app
+BODIGI_URL=http://www.bodigi.site
+W2B_URL=http://www.w2b.base44.app
 
 # OAuth/A2A Configuration (Optional - configure when ready)
 OAUTH_CLIENT_ID=your-oauth-client-id
 OAUTH_CLIENT_SECRET=your-oauth-client-secret
-OAUTH_CALLBACK_URL=https://bodigi.site/auth/callback
+OAUTH_CALLBACK_URL=https://www.bodigi.site/auth/callback
 OAUTH_ISSUER=https://your-oauth-provider.com
 
 # A2A API Keys (comma-separated)
@@ -150,7 +150,7 @@ docker-compose up -d
 
 ```bash
 # 1. SSH into your server
-ssh user@bodigi.site
+ssh user@www.bodigi.site
 
 # 2. Install dependencies
 sudo apt update
@@ -206,7 +206,7 @@ sudo systemctl status bobbie-digital
 ### Option 3: Nginx Reverse Proxy Configuration
 
 ```nginx
-# /etc/nginx/sites-available/bodigi.site
+# /etc/nginx/sites-available/www.bodigi.site
 
 upstream bobbie_digital {
     server 127.0.0.1:3000;
@@ -216,7 +216,7 @@ upstream bobbie_digital {
 server {
     listen 80;
     listen [::]:80;
-    server_name bodigi.site www.bodigi.site;
+    server_name www.bodigi.site bodigi.site;
     
     # Redirect HTTP to HTTPS
     return 301 https://$server_name$request_uri;
@@ -225,11 +225,11 @@ server {
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
-    server_name bodigi.site www.bodigi.site;
+    server_name www.bodigi.site bodigi.site;
 
     # SSL Configuration
-    ssl_certificate /etc/letsencrypt/live/bodigi.site/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/bodigi.site/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/www.bodigi.site/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/www.bodigi.site/privkey.pem;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers HIGH:!aNULL:!MD5;
     ssl_prefer_server_ciphers on;
@@ -271,7 +271,7 @@ server {
 Enable site:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/bodigi.site /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/www.bodigi.site /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -280,7 +280,7 @@ sudo systemctl reload nginx
 
 ```bash
 # Get SSL certificate
-sudo certbot --nginx -d bodigi.site -d www.bodigi.site
+sudo certbot --nginx -d www.bodigi.site -d bodigi.site
 
 # Auto-renewal
 sudo certbot renew --dry-run
@@ -291,7 +291,7 @@ sudo certbot renew --dry-run
 ### 1. Verify Security Headers
 
 ```bash
-curl -I https://bodigi.site
+curl -I http://www.bodigi.site
 ```
 
 Check for:
@@ -304,7 +304,7 @@ Check for:
 
 ```bash
 # Should return 429 after exceeding limit
-for i in {1..150}; do curl https://bodigi.site; done
+for i in {1..150}; do curl http://www.bodigi.site; done
 ```
 
 ### 3. Monitor Logs
@@ -400,8 +400,10 @@ If security breach detected:
 
 ## Support & Contact
 
-- **Email**: bobbiegray@bodigi.site
-- **Phone**: 937303
+- **Email**: support@bodigi-digital.com
+- **Phone**: (937)303-1858
+- **BoDiGi App**: http://www.bodigi.site (Fully automated small business builder)
+- **Where_2_Begin App**: http://www.w2b.base44.app (Organization and goal tracking app)
 - **Repository**: https://github.com/bobbiedigital2025/bobbie-digital-site
 
 ## Additional Resources
