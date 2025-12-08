@@ -22,23 +22,56 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // Security: Enable source maps only in development
+    sourcemap: process.env.NODE_ENV !== "production",
+    // Minify and tree-shake for production
+    minify: "terser",
+    target: "esnext",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          three: ["three", "@react-three/fiber", "@react-three/drei"],
+        },
+      },
+    },
   },
   server: {
     port: 3000,
-    strictPort: false, // Will find next available port if 3000 is busy
+    strictPort: false,
     host: true,
+    // Enhanced security settings
     allowedHosts: [
       ".manuspre.computer",
       ".manus.computer",
       ".manus-asia.computer",
       ".manuscomputer.ai",
       ".manusvm.computer",
+      "bodigi.site",
+      ".bodigi.site",
+      "bobbiedigital.base44.app",
+      ".bobbiedigital.base44.app",
       "localhost",
       "127.0.0.1",
     ],
+    cors: {
+      origin: process.env.NODE_ENV === "production" 
+        ? ["https://bodigi.site", "https://w2b.bobbiedigital.base44.app"]
+        : true,
+      credentials: true,
+    },
     fs: {
       strict: true,
-      deny: ["**/.*"],
+      deny: ["**/.*", "**/node_modules/**/.env*", "**/.git/**"],
     },
+    headers: {
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "X-XSS-Protection": "1; mode=block",
+    },
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ["react", "react-dom", "three"],
   },
 });
