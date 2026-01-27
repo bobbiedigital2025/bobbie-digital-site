@@ -13,6 +13,24 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+.env.*
+!.env.example
+
+# Secrets and credentials
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets/
+credentials/
+
+# OAuth/A2A tokens
+tokens/
+*.token
+
+# Security
+.npmrc
 
 # IDE and editor files
 .vscode/
