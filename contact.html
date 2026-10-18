@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Bobbie Digital</title>
+<meta name="description" content="Talk to Bobbie Digital. Tell us about your idea, your business, or what you need built — a human reads every message.">
+<link rel="canonical" href="https://bobbie.digital/contact.html">
+<link rel="icon" href="assets/gear.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<style>
+.form-card { max-width: 640px; margin: 40px auto 0; background: linear-gradient(180deg, var(--navy-2), var(--navy-3)); border: 1px solid rgba(227,185,78,.25); border-radius: var(--radius); padding: 36px; }
+label { display: block; font-weight: 700; font-size: .9rem; margin: 18px 0 6px; color: var(--ink); }
+input, select, textarea { width: 100%; background: var(--navy); border: 1px solid rgba(227,185,78,.25); border-radius: 10px; color: var(--ink); padding: 12px 14px; font-size: 1rem; font-family: inherit; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(227,185,78,.15); }
+textarea { min-height: 130px; resize: vertical; }
+.form-status { margin-top: 16px; font-weight: 700; min-height: 1.4em; }
+.form-status.ok { color: #6ee7a0; }
+.form-status.err { color: #ff9d9d; }
+</style>
+</head>
+<body>
+<nav><div class="nav-inner">
+  <a class="brand" href="/"><svg class="gear" viewBox="0 0 100 100" fill="none"><path d="M50 15l6 8a28 28 0 0 1 10 4l10-3 8 14-7 7a28 28 0 0 1 0 10l7 7-8 14-10-3a28 28 0 0 1-10 4l-6 8-6-8a28 28 0 0 1-10-4l-10 3-8-14 7-7a28 28 0 0 1 0-10l-7-7 8-14 10 3a28 28 0 0 1 10-4z" fill="#e3b94e"/><circle cx="50" cy="50" r="12" fill="#070b16"/><circle cx="50" cy="50" r="7" fill="#e3b94e"/></svg>Bobbie Digital</a>
+  <div class="nav-links">
+    <a href="future.html">The Future Is Here</a>
+    <a href="products.html">Products</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html" class="active">Contact</a>
+    <a class="nav-cta" href="https://bodigi2.com" target="_blank" rel="noopener">Build Your App</a>
+  </div>
+</div></nav>
+
+<header class="hero" style="padding: 70px 24px 50px;">
+  <div class="hero-grid"></div>
+  <h1>Talk to us.</h1>
+  <p class="lede">Tell us about your idea, your business, or what you need built. A human reads every message — and yes, the androids see them too.</p>
+</header>
+
+<section style="padding-top: 10px;">
+  <div class="wrap">
+    <form class="form-card" id="lead-form">
+      <label for="name">Your name *</label>
+      <input id="name" name="name" required autocomplete="name">
+      <label for="email">Email *</label>
+      <input id="email" name="email" type="email" required autocomplete="email">
+      <label for="business">Business or idea name</label>
+      <input id="business" name="business">
+      <label for="interest">What are you interested in?</label>
+      <select id="interest" name="interest">
+        <option>Building an app (BoDiGi 2.0)</option>
+        <option>Learning AI (Academy)</option>
+        <option>A video ad (Ad Studio)</option>
+        <option>Automation for my business</option>
+        <option>Partnering or investing</option>
+        <option>Something else</option>
+      </select>
+      <label for="message">Your message *</label>
+      <textarea id="message" name="message" required placeholder="Tell us what you're dreaming up."></textarea>
+      <div style="margin-top: 24px;"><button class="btn btn-gold" type="submit" style="border:none; cursor:pointer; width: 100%;">Send Message</button></div>
+      <div class="form-status" id="form-status"></div>
+    </form>
+  </div>
+</section>
+
+<footer><div class="foot-inner">
+  <div>© 2026 Bobbie Digital LLC · We make going digital easy for you.</div>
+  <div class="foot-links"><a href="future.html">The Future Is Here</a><a href="products.html">Products</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+</div></footer>
+
+<script>
+const WEBHOOK = "https://script.google.com/macros/s/AKfycbw2lW_fjIsIJ4VkujKWYhAjXzuatzp5xgdB0T30_iIogHQOkMXAC54zyTEJRvnPJtJD/exec";
+document.getElementById("lead-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const status = document.getElementById("form-status");
+  const btn = e.target.querySelector("button");
+  btn.disabled = true; status.className = "form-status"; status.textContent = "Sending…";
+  const data = Object.fromEntries(new FormData(e.target).entries());
+  try {
+    const params = new URLSearchParams(data);
+    await fetch(WEBHOOK + "?" + params.toString(), {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    });
+    status.className = "form-status ok";
+    status.textContent = "✓ Message sent — we read every one. Talk soon.";
+    e.target.reset();
+  } catch (err) {
+    status.className = "form-status err";
+    status.textContent = "Something hiccuped — email us instead: support@bobbie.digital";
+  }
+  btn.disabled = false;
+});
+</script>
+</body>
+</html>
