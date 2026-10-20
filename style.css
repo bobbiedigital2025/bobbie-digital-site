@@ -212,3 +212,16 @@ body.no-motion #skyline .street { animation: none; opacity: .55; }
 @media (max-width: 720px) { .motion-toggle { padding: 5px 10px; font-size: .72rem; } }
 /* let the city breathe through the hero */
 .hero { background: linear-gradient(180deg, rgba(7,11,22,.35) 0%, rgba(12,19,38,.55) 100%) !important; }
+
+/* ---------- flying traffic + scroll guide car (Bobbie, Oct 20 — "the future is here") ---------- */
+#skyline .veh { animation-name: flyX; animation-timing-function: linear; animation-iteration-count: infinite; }
+#skyline .veh.rtl { animation-name: flyXr; }
+@keyframes flyX { from { transform: translateX(-220px); } to { transform: translateX(1660px); } }
+@keyframes flyXr { from { transform: translateX(1660px); } to { transform: translateX(-220px); } }
+body.no-motion #skyline .veh { display: none; }
+
+#guide-car { position: fixed; left: 18px; right: auto; top: 16vh; z-index: 55; background: rgba(13,21,38,.55); border: 1px solid rgba(227,185,78,.35); border-radius: 999px; padding: 8px 10px; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: transform .25s ease-out, box-shadow .25s ease; animation: guideGlow 3.6s ease-in-out infinite; }
+#guide-car:hover { box-shadow: 0 0 22px rgba(227,185,78,.55); border-color: var(--gold); }
+@keyframes guideGlow { 0%,100% { box-shadow: 0 0 6px rgba(227,185,78,.15); } 50% { box-shadow: 0 0 16px rgba(227,185,78,.45); } }
+body.no-motion #guide-car { display: none; }
+@media (max-width: 640px) { #guide-car { display: none; } }

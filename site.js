@@ -43,6 +43,33 @@
       var sx = 30 + i * 125 + rnd() * 40;
       parts += '<circle class="street ' + (i % 2 ? 'o' : 'g') + '" cx="' + sx.toFixed(1) + '" cy="313" r="3" style="animation-delay:' + (rnd() * 4).toFixed(2) + 's"/>';
     }
+    /* flying traffic — futuristic air lanes (Bobbie, Oct 20) */
+    var vcols = { gold: '#e3b94e', cyan: '#4fd8e8' };
+    parts += '<defs>'
+      + '<linearGradient id="trail-gold" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#e3b94e" stop-opacity=".85"/><stop offset="1" stop-color="#e3b94e" stop-opacity="0"/></linearGradient>'
+      + '<linearGradient id="trail-cyan" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#4fd8e8" stop-opacity=".85"/><stop offset="1" stop-color="#4fd8e8" stop-opacity="0"/></linearGradient>'
+      + '</defs>';
+    var vehicles = [
+      /* [altitude, scale, color, duration, delay, dir]  dir: 1 = left-to-right */
+      [46, .5, 'cyan', 38, -4, 1],
+      [68, .45, 'gold', 46, -21, -1],
+      [84, .5, 'cyan', 42, -13, 1],
+      [104, .85, 'cyan', 17, -6, 1],
+      [120, .8, 'gold', 19, -2, -1],
+      [138, .75, 'cyan', 16, -9, 1],
+      [154, .7, 'gold', 21, -15, -1]
+    ];
+    for (var v = 0; v < vehicles.length; v++) {
+      var V = vehicles[v];
+      var col = vcols[V[2]];
+      var sx = V[5] < 0 ? -V[1] : V[1];
+      parts += '<g class="veh' + (V[5] < 0 ? ' rtl' : '') + '" style="animation-duration:' + V[3] + 's;animation-delay:' + V[4] + 's">'
+        + '<g transform="translate(0 ' + V[0] + ') scale(' + sx + ' ' + V[1] + ')">'
+        + '<rect x="-46" y="-1.2" width="42" height="2.4" fill="url(#trail-' + V[2] + ')"/>'
+        + '<rect x="-6" y="-2.6" width="14" height="5.2" rx="2.6" fill="#0d1526" stroke="' + col + '" stroke-width="1"/>'
+        + '<circle cx="2" cy="0" r="1.6" fill="' + col + '"/>'
+        + '</g></g>';
+    }
     svg.innerHTML = parts;
     var layer = document.createElement('div');
     layer.id = 'skyline';
@@ -92,3 +119,51 @@ if (navBurger) {
     })
   );
 }
+
+// ---------- scroll guide car (flies with you; click = next section) ----------
+(function () {
+  var sections = [].slice.call(document.querySelectorAll('section'));
+  var mobile = false;
+  try { mobile = window.matchMedia('(max-width: 640px)').matches; } catch (e) {}
+  if (sections.length < 2 || mobile) return;
+
+  var guide = document.createElement('button');
+  guide.id = 'guide-car';
+  guide.type = 'button';
+  guide.title = 'Fly to the next section';
+  guide.setAttribute('aria-label', 'Scroll to the next section');
+  guide.innerHTML =
+    '<svg viewBox="0 0 120 40" width="96" height="32" aria-hidden="true">'
+    + '<defs><linearGradient id="gtrail" x1="1" y1="0" x2="0" y2="0">'
+    + '<stop offset="0" stop-color="#e3b94e" stop-opacity=".95"/>'
+    + '<stop offset="1" stop-color="#e3b94e" stop-opacity="0"/></linearGradient></defs>'
+    + '<rect x="6" y="17" width="72" height="5" rx="2.5" fill="url(#gtrail)"/>'
+    + '<rect x="66" y="12" width="34" height="15" rx="7" fill="#0d1526" stroke="#e3b94e" stroke-width="1.6"/>'
+    + '<circle cx="88" cy="19" r="4" fill="#e3b94e"/>'
+    + '<circle cx="98" cy="25" r="2" fill="#4fd8e8"/>'
+    + '</svg>';
+  document.body.appendChild(guide);
+
+  var ticking = false;
+  function place() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    guide.style.transform = 'translateY(' + (p * 58).toFixed(2) + 'vh)';
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { window.requestAnimationFrame(place); ticking = true; }
+  }, { passive: true });
+  place();
+
+  guide.addEventListener('click', function () {
+    var y = window.scrollY + 96; /* below the nav */
+    var next = null;
+    for (var i = 0; i < sections.length; i++) {
+      var top = sections[i].getBoundingClientRect().top + window.scrollY;
+      if (top > y) { next = sections[i]; break; }
+    }
+    if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
