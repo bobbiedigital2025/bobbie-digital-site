@@ -167,3 +167,64 @@ if (navBurger) {
     else window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();
+
+// ---------- flying-car cursor (desktop only, obeys the motion switch) ----------
+(function () {
+  var finePointer = false;
+  try { finePointer = window.matchMedia('(pointer: fine)').matches; } catch (e) {}
+  if (!finePointer) return;
+
+  var car = document.createElement('div');
+  car.id = 'cursor-car';
+  car.setAttribute('aria-hidden', 'true');
+  car.innerHTML =
+    '<svg viewBox="0 0 62 24" width="56" height="22">'
+    + '<defs><linearGradient id="ctrail" x1="1" y1="0" x2="0" y2="0">'
+    + '<stop offset="0" stop-color="#e3b94e" stop-opacity=".9"/>'
+    + '<stop offset="1" stop-color="#e3b94e" stop-opacity="0"/></linearGradient></defs>'
+    + '<rect x="0" y="9.5" width="30" height="4" rx="2" fill="url(#ctrail)"/>'
+    + '<rect x="26" y="5.5" width="28" height="12" rx="6" fill="#0d1526" stroke="#e3b94e" stroke-width="1.4"/>'
+    + '<circle cx="45" cy="11" r="3.2" fill="#4fd8e8"/>'
+    + '<ellipse cx="39" cy="19.5" rx="10" ry="1.6" fill="#e3b94e" opacity=".25"/>'
+    + '</svg>';
+  document.body.appendChild(car);
+
+  var mx = -100, my = -100, cx = -100, cy = -100, angle = 0;
+  function loop() {
+    var px = cx, py = cy;
+    cx += (mx - cx) * 0.35;
+    cy += (my - cy) * 0.35;
+    var dx = cx - px, dy = cy - py;
+    if (Math.abs(dx) + Math.abs(dy) > 0.4) {
+      var target = Math.atan2(dy, dx) * 180 / Math.PI;
+      /* ease toward target along the shortest arc */
+      var diff = ((target - angle + 540) % 360) - 180;
+      angle += diff * 0.12;
+    } else {
+      angle += ((0 - angle + 540) % 360 - 180) * 0.04; /* settle level when parked */
+    }
+    car.style.transform = 'translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px) translate(-50%,-50%) rotate(' + angle.toFixed(1) + 'deg)';
+    requestAnimationFrame(loop);
+  }
+  document.addEventListener('mousemove', function (e) {
+    mx = e.clientX; my = e.clientY;
+    if (cx < -50) { cx = mx; cy = my; }
+    car.classList.add('vis');
+  }, { passive: true });
+  requestAnimationFrame(loop);
+
+  var HOVER_SEL = 'a, button, input, textarea, select, label, [role="button"], summary';
+  document.addEventListener('mouseover', function (e) {
+    if (e.target.closest && e.target.closest(HOVER_SEL)) car.classList.add('on');
+  }, { passive: true });
+  document.addEventListener('mouseout', function (e) {
+    if (e.target.closest && e.target.closest(HOVER_SEL)) {
+      var to = e.relatedTarget;
+      if (!to || !to.closest || !to.closest(HOVER_SEL)) car.classList.remove('on');
+    }
+  }, { passive: true });
+
+  document.documentElement.addEventListener('mouseleave', function () {
+    car.classList.remove('vis');
+  });
+})();

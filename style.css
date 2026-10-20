@@ -225,3 +225,9 @@ body.no-motion #skyline .veh { display: none; }
 @keyframes guideGlow { 0%,100% { box-shadow: 0 0 6px rgba(227,185,78,.15); } 50% { box-shadow: 0 0 16px rgba(227,185,78,.45); } }
 body.no-motion #guide-car { display: none; }
 @media (max-width: 640px) { #guide-car { display: none; } }
+
+/* ---------- flying-car cursor (Bobbie, Oct 20) ---------- */
+#cursor-car { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 9998; opacity: 0; transition: opacity .25s ease, filter .25s ease; will-change: transform; }
+#cursor-car.vis { opacity: 1; }
+#cursor-car.on { filter: drop-shadow(0 0 8px rgba(227,185,78,.9)) drop-shadow(0 0 18px rgba(79,216,232,.45)); }
+body.no-motion #cursor-car { display: none; }
