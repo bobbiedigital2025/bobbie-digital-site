@@ -171,10 +171,9 @@ nav.nav-open .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(4
 nav.nav-open .nav-burger span:nth-child(2) { opacity: 0; }
 nav.nav-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-@media (max-width: 640px) {
+/* burger panel: phones + tablets — 5 nav links wrap below ~1080px (Rune, PR#6 review) */
+@media (max-width: 1080px) {
   .nav-burger { display: flex; }
-  .nav-inner { padding: 11px 16px; }
-  .brand { font-size: 1.02rem; white-space: nowrap; }
   .nav-links { display: none; position: fixed; top: 54px; left: 0; right: 0; z-index: 60;
     flex-direction: column; align-items: center; gap: 15px; padding: 20px 16px 22px;
     background: rgba(7,11,22,.96); border-bottom: 1px solid rgba(227,185,78,.28);
@@ -184,6 +183,10 @@ nav.nav-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(
   .nav-links a { font-size: 1rem; }
   .nav-links .nav-cta { display: inline-block; margin-top: 4px; }
   .motion-toggle { margin-top: 8px; }
+}
+@media (max-width: 640px) {
+  .nav-inner { padding: 11px 16px; }
+  .brand { font-size: 1.02rem; white-space: nowrap; }
   .mag-badge { transform: scale(.84); transform-origin: top center; margin-bottom: 20px; }
   #skyline { opacity: .72; height: 38vh; }
 }
