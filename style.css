@@ -164,7 +164,34 @@ picture { display: contents; }
 .voice-role { font-size: .74rem; text-transform: uppercase; letter-spacing: .16em; color: var(--ink-dim); }
 .pull { margin: 30px 0; padding: 6px 0 6px 22px; border-left: 3px solid var(--gold); font-size: 1.22rem; line-height: 1.55; font-weight: 600; font-style: italic; color: var(--gold-bright); }
 .foot-credit { max-width: var(--max); margin: 16px auto 0; text-align: center; font-size: .78rem; color: var(--ink-dim); }
-@media (max-width: 480px) { .nav-links { gap: 11px; font-size: .8rem; } .nav-inner { padding: 12px 16px; } .brand { font-size: 1rem; } }
+/* ---------- mobile menu (burger) — tech-portfolio nav ---------- */
+.nav-burger { display: none; background: transparent; border: 0; cursor: pointer; padding: 9px 4px; flex-direction: column; gap: 5px; align-items: center; }
+.nav-burger span { display: block; width: 24px; height: 2px; background: var(--gold); border-radius: 2px; transition: transform .25s ease, opacity .25s ease; }
+nav.nav-open .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+nav.nav-open .nav-burger span:nth-child(2) { opacity: 0; }
+nav.nav-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 640px) {
+  .nav-burger { display: flex; }
+  .nav-inner { padding: 11px 16px; }
+  .brand { font-size: 1.02rem; white-space: nowrap; }
+  .nav-links { display: none; position: fixed; top: 54px; left: 0; right: 0; z-index: 60;
+    flex-direction: column; align-items: center; gap: 15px; padding: 20px 16px 22px;
+    background: rgba(7,11,22,.96); border-bottom: 1px solid rgba(227,185,78,.28);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 24px 50px rgba(0,0,0,.5); }
+  nav.nav-open .nav-links { display: flex; }
+  .nav-links a { font-size: 1rem; }
+  .nav-links .nav-cta { display: inline-block; margin-top: 4px; }
+  .motion-toggle { margin-top: 8px; }
+  .mag-badge { transform: scale(.84); transform-origin: top center; margin-bottom: 20px; }
+  #skyline { opacity: .72; height: 38vh; }
+}
+
+/* gold CTA breathes (stops when motion is off) */
+@keyframes ctaGlow { 0%,100% { box-shadow: 0 6px 30px rgba(227,185,78,.28); } 50% { box-shadow: 0 6px 38px rgba(227,185,78,.6); } }
+.btn-gold { animation: ctaGlow 3.6s ease-in-out infinite; }
+body.no-motion .btn-gold { animation: none; }
 
 /* ---------- night skyline background + motion toggle (Bobbie, Oct 20) ---------- */
 #skyline { position: fixed; left: 0; right: 0; bottom: 0; height: 34vh; max-height: 340px; z-index: -1; pointer-events: none; opacity: .62; }

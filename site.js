@@ -75,3 +75,20 @@
     });
   });
 })();
+
+// ---------- mobile menu ----------
+const navBurger = document.getElementById('nav-burger');
+if (navBurger) {
+  const nav = document.querySelector('nav');
+  navBurger.addEventListener('click', () => {
+    const open = nav.classList.toggle('nav-open');
+    navBurger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navBurger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      navBurger.setAttribute('aria-expanded', 'false');
+    })
+  );
+}
