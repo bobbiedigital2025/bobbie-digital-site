@@ -229,7 +229,7 @@ if (navBurger) {
 
   var stored = null;
   try { stored = window.localStorage.getItem('bd-cursor'); } catch (e) {}
-  var current = CHASERS[stored] ? stored : 'car';
+  var current = (stored === 'off' || CHASERS[stored]) ? stored : 'car';
 
   var el = document.createElement('div');
   el.id = 'cursor-car';
