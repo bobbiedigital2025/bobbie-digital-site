@@ -216,6 +216,21 @@ body.no-motion #skyline .street { animation: none; opacity: .55; }
 /* let the city breathe through the hero */
 .hero { background: linear-gradient(180deg, rgba(7,11,22,.35) 0%, rgba(12,19,38,.55) 100%) !important; }
 
+/* ---------- cursor picker popover (Bobbie, Oct 20) ---------- */
+.cursor-picker { position: relative; display: inline-block; }
+.cursor-picker-btn { padding: 6px 10px; white-space: nowrap; }
+.cursor-picker-menu { position: absolute; top: calc(100% + 8px); right: 0; z-index: 1200; min-width: 190px; background: rgba(12,19,38,.96); border: 1px solid rgba(227,185,78,.35); border-radius: 12px; padding: 6px; box-shadow: 0 14px 40px rgba(0,0,0,.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.cursor-picker-item { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; background: transparent; border: 1px solid transparent; border-radius: 9px; color: var(--ink); font: inherit; font-size: .85rem; cursor: pointer; text-align: left; }
+.cursor-picker-item:hover, .cursor-picker-item:focus-visible { background: rgba(227,185,78,.12); outline: none; }
+.cursor-picker-item.sel { border-color: rgba(227,185,78,.55); background: rgba(227,185,78,.08); }
+.cursor-picker-item .cpi-art { width: 34px; display: inline-flex; justify-content: center; }
+.cursor-picker-item .cpi-art svg { max-width: 32px; height: auto; }
+.cursor-picker-divider { height: 1px; margin: 5px 8px; background: rgba(227,185,78,.22); }
+@keyframes chaserSpin { to { transform: rotate(360deg); } }
+.chaser-spin { animation: chaserSpin 5s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .chaser-spin { animation: none; } }
+@media (max-width: 640px) { .cursor-picker { display: none; } }
+
 /* ---------- flying traffic + scroll guide car (Bobbie, Oct 20 — "the future is here") ---------- */
 #skyline .veh { animation-name: flyX; animation-timing-function: linear; animation-iteration-count: infinite; }
 #skyline .veh.rtl { animation-name: flyXr; }
