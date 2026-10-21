@@ -290,7 +290,7 @@ if (navBurger) {
 
   apply();
 
-  /* ---------- picker UI (injected next to the motion toggle on every page) ---------- */
+  /* ---------- picker UI: one ✦ button, chasers + motion in one menu ---------- */
   var toggle = document.getElementById('motion-toggle');
   if (!toggle || !toggle.parentNode) return;
 
@@ -301,14 +301,18 @@ if (navBurger) {
   btn.className = 'motion-toggle cursor-picker-btn';
   btn.setAttribute('aria-haspopup', 'true');
   btn.setAttribute('aria-expanded', 'false');
-  btn.title = 'Pick your cursor chaser, or turn it off';
+  btn.title = 'Cursor chaser and motion settings';
   var menu = document.createElement('div');
   menu.className = 'cursor-picker-menu';
   menu.setAttribute('role', 'menu');
   menu.hidden = true;
 
+  var motionItem = null;
   function paintBtn() {
-    btn.innerHTML = '✦ Cursor: ' + (CHASERS[current] ? CHASERS[current].label : 'Off');
+    btn.innerHTML = '✦ ' + (CHASERS[current] ? CHASERS[current].label : 'Cursor: Off');
+  }
+  function paintMotion() {
+    if (motionItem) motionItem.querySelector('.cpi-name').textContent = toggle.textContent.replace('✦ ', '').trim();
   }
   function choose(id) {
     current = id;
@@ -329,6 +333,19 @@ if (navBurger) {
       item.addEventListener('click', function () { choose(id); closeMenu(); });
       menu.appendChild(item);
     });
+    var div = document.createElement('div');
+    div.className = 'cursor-picker-divider';
+    menu.appendChild(div);
+    motionItem = document.createElement('button');
+    motionItem.type = 'button';
+    motionItem.className = 'cursor-picker-item';
+    motionItem.innerHTML = '<span class="cpi-art">✦</span><span class="cpi-name"></span>';
+    motionItem.addEventListener('click', function () {
+      toggle.click();
+      window.setTimeout(paintMotion, 0);
+    });
+    menu.appendChild(motionItem);
+    paintMotion();
   }
   function openMenu() { paintMenu(); menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
   function closeMenu() { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
@@ -339,5 +356,6 @@ if (navBurger) {
   wrap.appendChild(btn);
   wrap.appendChild(menu);
   toggle.parentNode.insertBefore(wrap, toggle.nextSibling);
+  toggle.style.display = 'none';
   paintBtn();
 })();
