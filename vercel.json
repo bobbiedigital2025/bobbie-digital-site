@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/academy", "destination": "https://bobbie-digital-academy.vercel.app/academy/" },
+    { "source": "/academy/:path*", "destination": "https://bobbie-digital-academy.vercel.app/academy/:path*" }
+  ]
+}
