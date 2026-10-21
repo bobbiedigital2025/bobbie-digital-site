@@ -168,63 +168,176 @@ if (navBurger) {
   });
 })();
 
-// ---------- flying-car cursor (desktop only, obeys the motion switch) ----------
+// ---------- cursor chasers + picker (Bobbie, Oct 20: car / gear / robot / star / off) ----------
 (function () {
   var finePointer = false;
   try { finePointer = window.matchMedia('(pointer: fine)').matches; } catch (e) {}
   if (!finePointer) return;
 
-  var car = document.createElement('div');
-  car.id = 'cursor-car';
-  car.setAttribute('aria-hidden', 'true');
-  car.innerHTML =
-    '<svg viewBox="0 0 62 24" width="56" height="22">'
-    + '<defs><linearGradient id="ctrail" x1="1" y1="0" x2="0" y2="0">'
-    + '<stop offset="0" stop-color="#e3b94e" stop-opacity=".9"/>'
-    + '<stop offset="1" stop-color="#e3b94e" stop-opacity="0"/></linearGradient></defs>'
-    + '<rect x="0" y="9.5" width="30" height="4" rx="2" fill="url(#ctrail)"/>'
-    + '<rect x="26" y="5.5" width="28" height="12" rx="6" fill="#0d1526" stroke="#e3b94e" stroke-width="1.4"/>'
-    + '<circle cx="45" cy="11" r="3.2" fill="#4fd8e8"/>'
-    + '<ellipse cx="39" cy="19.5" rx="10" ry="1.6" fill="#e3b94e" opacity=".25"/>'
-    + '</svg>';
-  document.body.appendChild(car);
+  var CHASERS = {
+    car: {
+      label: 'Flying Car',
+      rotate: true,
+      svg: '<svg viewBox="0 0 62 24" width="56" height="22">'
+        + '<defs><linearGradient id="ctrail" x1="1" y1="0" x2="0" y2="0">'
+        + '<stop offset="0" stop-color="#e3b94e" stop-opacity=".9"/>'
+        + '<stop offset="1" stop-color="#e3b94e" stop-opacity="0"/></linearGradient></defs>'
+        + '<rect x="0" y="9.5" width="30" height="4" rx="2" fill="url(#ctrail)"/>'
+        + '<rect x="26" y="5.5" width="28" height="12" rx="6" fill="#0d1526" stroke="#e3b94e" stroke-width="1.4"/>'
+        + '<circle cx="45" cy="11" r="3.2" fill="#4fd8e8"/>'
+        + '<ellipse cx="39" cy="19.5" rx="10" ry="1.6" fill="#e3b94e" opacity=".25"/>'
+        + '</svg>'
+    },
+    gear: {
+      label: 'BoDiGi Gear',
+      rotate: false, spin: true,
+      svg: '<svg viewBox="0 0 40 40" width="34" height="34">'
+        + '<g class="chaser-spin" style="transform-origin:20px 20px">'
+        + '<path d="M20 6l2.2 3.6 4.1-1 1.2 4 4.2.8-.3 4.2 3.2 2.7-2.2 3.6 1.6 3.9-3.8 1.8-.1 4.3-4.2.7-1.8 3.9-3.9-1.9-3.4 2.6-2.9-3.2-4.2-.1.2-4.2-3.7-2.2 2.7-3.3-2.1-3.7 3.7-2.1-.4-4.2 4.2-.9 1.3-4 4.1 1.1z" fill="#0d1526" stroke="#e3b94e" stroke-width="1.6"/>'
+        + '<circle cx="20" cy="20" r="7.5" fill="#0d1526" stroke="#e3b94e" stroke-width="1.4"/>'
+        + '</g>'
+        + '<path d="M21.5 12.5l-5 8h3.4l-1.4 7 5-8h-3.4z" fill="#ffd76a"/>'
+        + '</svg>'
+    },
+    robot: {
+      label: 'Robot',
+      rotate: false, bob: true,
+      svg: '<svg viewBox="0 0 36 36" width="32" height="32">'
+        + '<rect x="7" y="11" width="22" height="17" rx="5" fill="#0d1526" stroke="#e3b94e" stroke-width="1.5"/>'
+        + '<rect x="14" y="4" width="8" height="5" rx="2" fill="#0d1526" stroke="#e3b94e" stroke-width="1.3"/>'
+        + '<circle cx="18" cy="3" r="1.8" fill="#4fd8e8"/>'
+        + '<circle cx="14" cy="18.5" r="2.6" fill="#4fd8e8"/>'
+        + '<circle cx="22" cy="18.5" r="2.6" fill="#4fd8e8"/>'
+        + '<rect x="13" y="23.5" width="10" height="2" rx="1" fill="#e3b94e"/>'
+        + '<rect x="3" y="16" width="3" height="7" rx="1.5" fill="#e3b94e" opacity=".7"/>'
+        + '<rect x="30" y="16" width="3" height="7" rx="1.5" fill="#e3b94e" opacity=".7"/>'
+        + '</svg>'
+    },
+    star: {
+      label: 'Shooting Star',
+      rotate: true,
+      svg: '<svg viewBox="0 0 62 24" width="54" height="21">'
+        + '<defs><linearGradient id="strail" x1="1" y1="0" x2="0" y2="0">'
+        + '<stop offset="0" stop-color="#4fd8e8" stop-opacity=".85"/>'
+        + '<stop offset=".5" stop-color="#e3b94e" stop-opacity=".45"/>'
+        + '<stop offset="1" stop-color="#e3b94e" stop-opacity="0"/></linearGradient></defs>'
+        + '<rect x="0" y="9" width="40" height="5" rx="2.5" fill="url(#strail)"/>'
+        + '<path d="M49 2l2.4 5.4 5.9.6-4.4 4 1.2 5.8-5.1-3-5.1 3 1.2-5.8-4.4-4 5.9-.6z" fill="#ffd76a" stroke="#e3b94e" stroke-width="1"/>'
+        + '</svg>'
+    }
+  };
 
-  var mx = -100, my = -100, cx = -100, cy = -100, angle = 0;
-  function loop() {
+  var stored = null;
+  try { stored = window.localStorage.getItem('bd-cursor'); } catch (e) {}
+  var current = CHASERS[stored] ? stored : 'car';
+
+  var el = document.createElement('div');
+  el.id = 'cursor-car';
+  el.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(el);
+
+  var mx = -100, my = -100, cx = -100, cy = -100, angle = 0, t0 = null;
+  function loop(ts) {
+    if (t0 === null) t0 = ts;
+    var secs = (ts - t0) / 1000;
+    var conf = CHASERS[current];
     var px = cx, py = cy;
     cx += (mx - cx) * 0.35;
     cy += (my - cy) * 0.35;
-    var dx = cx - px, dy = cy - py;
-    if (Math.abs(dx) + Math.abs(dy) > 0.4) {
-      var target = Math.atan2(dy, dx) * 180 / Math.PI;
-      /* ease toward target along the shortest arc */
-      var diff = ((target - angle + 540) % 360) - 180;
-      angle += diff * 0.12;
+    var bobY = 0;
+    if (conf && conf.bob) bobY = Math.sin(secs * 3.2) * 3;
+    if (conf && conf.rotate) {
+      var dx = cx - px, dy = cy - py;
+      if (Math.abs(dx) + Math.abs(dy) > 0.4) {
+        var target = Math.atan2(dy, dx) * 180 / Math.PI;
+        var diff = ((target - angle + 540) % 360) - 180;
+        angle += diff * 0.12;
+      } else {
+        angle += ((0 - angle + 540) % 360 - 180) * 0.04;
+      }
     } else {
-      angle += ((0 - angle + 540) % 360 - 180) * 0.04; /* settle level when parked */
+      angle = 0;
     }
-    car.style.transform = 'translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px) translate(-50%,-50%) rotate(' + angle.toFixed(1) + 'deg)';
+    el.style.transform = 'translate(' + cx.toFixed(1) + 'px,' + (cy + bobY).toFixed(1) + 'px) translate(-50%,-50%) rotate(' + angle.toFixed(1) + 'deg)';
     requestAnimationFrame(loop);
   }
+
+  function apply() {
+    var conf = CHASERS[current];
+    if (!conf) { el.classList.remove('vis'); el.innerHTML = ''; return; }
+    el.innerHTML = conf.svg;
+  }
+
   document.addEventListener('mousemove', function (e) {
+    if (!CHASERS[current]) return;
     mx = e.clientX; my = e.clientY;
     if (cx < -50) { cx = mx; cy = my; }
-    car.classList.add('vis');
+    el.classList.add('vis');
   }, { passive: true });
   requestAnimationFrame(loop);
 
   var HOVER_SEL = 'a, button, input, textarea, select, label, [role="button"], summary';
   document.addEventListener('mouseover', function (e) {
-    if (e.target.closest && e.target.closest(HOVER_SEL)) car.classList.add('on');
+    if (e.target.closest && e.target.closest(HOVER_SEL)) el.classList.add('on');
   }, { passive: true });
   document.addEventListener('mouseout', function (e) {
     if (e.target.closest && e.target.closest(HOVER_SEL)) {
       var to = e.relatedTarget;
-      if (!to || !to.closest || !to.closest(HOVER_SEL)) car.classList.remove('on');
+      if (!to || !to.closest || !to.closest(HOVER_SEL)) el.classList.remove('on');
     }
   }, { passive: true });
+  document.documentElement.addEventListener('mouseleave', function () { el.classList.remove('vis'); });
 
-  document.documentElement.addEventListener('mouseleave', function () {
-    car.classList.remove('vis');
-  });
+  apply();
+
+  /* ---------- picker UI (injected next to the motion toggle on every page) ---------- */
+  var toggle = document.getElementById('motion-toggle');
+  if (!toggle || !toggle.parentNode) return;
+
+  var wrap = document.createElement('div');
+  wrap.className = 'cursor-picker';
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'motion-toggle cursor-picker-btn';
+  btn.setAttribute('aria-haspopup', 'true');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.title = 'Pick your cursor chaser, or turn it off';
+  var menu = document.createElement('div');
+  menu.className = 'cursor-picker-menu';
+  menu.setAttribute('role', 'menu');
+  menu.hidden = true;
+
+  function paintBtn() {
+    btn.innerHTML = '✦ Cursor: ' + (CHASERS[current] ? CHASERS[current].label : 'Off');
+  }
+  function choose(id) {
+    current = id;
+    try { window.localStorage.setItem('bd-cursor', id); } catch (e) {}
+    apply(); paintBtn(); paintMenu();
+  }
+  function paintMenu() {
+    menu.innerHTML = '';
+    Object.keys(CHASERS).concat(['off']).forEach(function (id) {
+      var item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'cursor-picker-item' + (id === current ? ' sel' : '');
+      item.setAttribute('role', 'menuitemradio');
+      item.setAttribute('aria-checked', id === current ? 'true' : 'false');
+      item.innerHTML = id === 'off'
+        ? '<span class="cpi-name">Off</span>'
+        : '<span class="cpi-art">' + CHASERS[id].svg + '</span><span class="cpi-name">' + CHASERS[id].label + '</span>';
+      item.addEventListener('click', function () { choose(id); closeMenu(); });
+      menu.appendChild(item);
+    });
+  }
+  function openMenu() { paintMenu(); menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
+  function closeMenu() { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+  btn.addEventListener('click', function (e) { e.stopPropagation(); menu.hidden ? openMenu() : closeMenu(); });
+  document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) closeMenu(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+
+  wrap.appendChild(btn);
+  wrap.appendChild(menu);
+  toggle.parentNode.insertBefore(wrap, toggle.nextSibling);
+  paintBtn();
 })();
