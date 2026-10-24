@@ -42,6 +42,7 @@
 .ac-video-frame { position: relative; }
 .ac-video-frame:has(iframe) { aspect-ratio: 16/9; }
 .ac-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.ac-video-frame video { display: block; width: 100%; height: auto; background: #000; }
 .ac-video-soon {
   display: flex; flex-direction: column; gap: 14px;
   align-items: center; justify-content: center; text-align: center; padding: 56px 24px;
@@ -166,19 +167,11 @@
         <!-- VIDEO EMBED: swap this placeholder for the YouTube iframe once episode 1 is posted.
              YouTube embed format:
              <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Balling on a Budget" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-        <div class="ac-video-soon">
-          <div class="rec">🎬</div>
-          <h3>Episode 1 drops this week</h3>
-          <p>"5 free tools that build your first app — no money, no developer, no excuses." Follow below so you don't miss it.</p>
-          <div class="ac-follow-row">
-            <!-- SOCIAL LINKS: swap # for the real channel URLs once the accounts are live -->
-            <a class="btn btn-gold" href="#">TikTok</a>
-            <a class="btn btn-ghost" href="#">YouTube</a>
-            <a class="btn btn-ghost" href="#">Instagram</a>
-          </div>
-        </div>
+        <video controls preload="none" playsinline poster="assets/videos/bd-topic-poster.jpg">
+          <source src="assets/videos/bd-topic-cine.mp4" type="video/mp4">
+        </video>
       </div>
-      <div class="ac-video-cap"><strong>New episode every week.</strong> Tuesdays + Thursdays are recording nights — the camera never stops for long.</div>
+      <div class="ac-video-cap"><strong>Episode 1 — watch AI build a real app.</strong> New episode every week. Tuesdays + Thursdays are recording nights — the camera never stops for long.</div>
     </div>
   </div>
 </section>
