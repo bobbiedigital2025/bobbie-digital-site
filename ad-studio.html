@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ad Studio — Cinematic Video Ads for Listings &amp; Local Business | Bobbie Digital</title>
+<meta name="description" content="Ad Studio by Bobbie Digital: cinematic 30-second video ads for real estate listings and local businesses. AI-crafted, human-approved, delivered within 48 hours. Founding pricing from $99.">
+<link rel="canonical" href="https://bobbie.digital/ad-studio.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ad Studio — Your listing deserves to be a movie">
+<meta property="og:description" content="Cinematic 30-second video ads for real estate listings and local businesses. Made in Wheeling, WV.">
+<meta property="og:url" content="https://bobbie.digital/ad-studio.html">
+<meta property="og:image" content="https://bobbie.digital/assets/team-poster.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/gear.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ---- Ad Studio page (scoped) ---- */
+.as-hero { position: relative; overflow: hidden; text-align: center;
+  background:
+    radial-gradient(1100px 500px at 85% -10%, rgba(155,107,255,.14), transparent 60%),
+    radial-gradient(900px 480px at 10% 110%, rgba(79,216,232,.10), transparent 60%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+  padding: 84px 24px 64px; }
+.as-hero .grid { position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image: linear-gradient(rgba(79,216,232,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(79,216,232,.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent 75%); }
+.as-badge { display: inline-block; font-size: .8rem; font-weight: 800; letter-spacing: 2.5px;
+  color: var(--gold-bright); border: 1px solid rgba(227,185,78,.45);
+  padding: 8px 18px; border-radius: 999px; margin-bottom: 22px; background: rgba(227,185,78,.08); }
+.as-hero h1 { font-size: clamp(2rem, 5.5vw, 3.4rem); line-height: 1.15; font-weight: 850; max-width: 850px; margin: 0 auto 18px; position: relative; }
+.as-hero .lede { max-width: 680px; margin: 0 auto 30px; color: var(--ink-dim); font-size: 1.1rem; position: relative; }
+.as-hero .gold { color: var(--gold); }
+.as-section { max-width: 980px; margin: 0 auto; padding: 56px 24px; }
+.as-section h2 { font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 800; text-align: center; margin: 0 0 12px; }
+.as-sub { text-align: center; color: var(--ink-dim); max-width: 640px; margin: 0 auto 36px; }
+.as-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.as-card { background: var(--navy-2); border: 1px solid rgba(79,216,232,.2); border-radius: var(--radius); padding: 26px 24px; }
+.as-card h3 { margin: 0 0 10px; font-size: 1.1rem; color: var(--cyan); }
+.as-card p { margin: 0; color: var(--ink-dim); font-size: .96rem; line-height: 1.6; }
+.as-steps { counter-reset: step; display: grid; gap: 14px; max-width: 680px; margin: 0 auto; }
+.as-step { display: flex; gap: 18px; align-items: flex-start; background: var(--navy-2); border: 1px solid rgba(155,107,255,.25); border-radius: var(--radius); padding: 20px 22px; }
+.as-step::before { counter-increment: step; content: counter(step); flex: 0 0 38px; height: 38px; display: grid; place-items: center;
+  border-radius: 50%; background: rgba(227,185,78,.12); border: 1px solid rgba(227,185,78,.45); color: var(--gold-bright); font-weight: 800; }
+.as-step p { margin: 4px 0 0; color: var(--ink-dim); font-size: .96rem; line-height: 1.6; }
+.as-step strong { color: var(--ink); }
+.as-price { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+.as-tier { background: var(--navy-2); border: 1px solid rgba(79,216,232,.2); border-radius: var(--radius); padding: 26px 22px; text-align: center; }
+.as-tier.hot { border-color: rgba(227,185,78,.55); box-shadow: 0 12px 40px rgba(227,185,78,.08); }
+.as-tier .name { font-size: .85rem; letter-spacing: 1.5px; font-weight: 800; color: var(--cyan); text-transform: uppercase; }
+.as-tier .amount { font-size: 2.2rem; font-weight: 850; color: var(--gold-bright); margin: 10px 0 6px; }
+.as-tier .what { color: var(--ink-dim); font-size: .92rem; line-height: 1.55; }
+.as-trust { max-width: 760px; margin: 0 auto; background: var(--navy-2); border: 1px solid rgba(155,107,255,.3); border-radius: var(--radius); padding: 30px 28px; }
+.as-trust h2 { text-align: left; }
+.as-trust li { color: var(--ink-dim); line-height: 1.7; margin-bottom: 6px; }
+.as-trust li::marker { color: var(--gold); }
+.as-cta { text-align: center; padding: 20px 24px 76px; }
+.as-cta .btn { display: inline-block; }
+.as-note { margin-top: 14px; color: var(--ink-dim); font-size: .85rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <svg class="gear" viewBox="0 0 100 100" fill="none"><path d="M50 15l6 8a28 28 0 0 1 10 4l10-3 8 14-7 7a28 28 0 0 1 0 10l7 7-8 14-10-3a28 28 0 0 1-10 4l-6 8-6-8a28 28 0 0 1-10-4l-10 3-8-14 7-7a28 28 0 0 1 0-10l-7-7 8-14 10 3a28 28 0 0 1 10 4z" fill="#e3b94e"/><circle cx="50" cy="50" r="12" fill="#070b16"/><circle cx="50" cy="50" r="7" fill="#e3b94e"/></svg>
+      Bobbie Digital
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="future.html">The Future Is Here</a>
+      <a href="learn.html">Watch + Learn</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="savings.html">Savings</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="nav-cta" href="https://bodigi2.com" target="_blank" rel="noopener">Build Your App</a>
+    <button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="true" title="Turn the flashing city lights on or off">✦ Motion: ON</button> </div>
+    <button class="nav-burger" id="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="as-hero">
+  <div class="grid"></div>
+  <span class="as-badge">AD STUDIO</span>
+  <h1>Your listing deserves to be <span class="gold">a movie</span>.</h1>
+  <p class="lede">Cinematic 30-second video ads for real estate listings and local businesses — crafted by our AI team, approved by a human, and delivered within 48 hours.</p>
+</header>
+
+<section class="as-section">
+  <h2>What we make</h2>
+  <p class="as-sub">Every ad is built around one thing: making someone stop scrolling and book a showing.</p>
+  <div class="as-cards">
+    <div class="as-card"><h3>🎬 Listing Ads</h3><p>A 30-second cinematic cut of your listing — the photos you already have, turned into a film with motion, music, and your branding on the endcard. Ready for MLS, social, and your own site.</p></div>
+    <div class="as-card"><h3>📱 Social Cuts</h3><p>The same ad, cut vertical for Reels, TikTok, and Facebook — because that's where buyers actually scroll. One listing, every feed.</p></div>
+    <div class="as-card"><h3>🔗 One-Link Listing Pages</h3><p>All your listing videos on one clean page — a single link for your Instagram bio, Facebook page, or email signature. Anyone who clicks sees every home you're moving.</p></div>
+  </div>
+</section>
+
+<section class="as-section">
+  <h2>How it works</h2>
+  <p class="as-sub">No shoots, no scheduling, no production crew. Your photos are the raw film.</p>
+  <div class="as-steps">
+    <div class="as-step"><div><strong>Send the listing.</strong><p>You send the listing link or the photos. That's the whole ask — no forms, no briefs, no meetings.</p></div></div>
+    <div class="as-step"><div><strong>We craft the ad.</strong><p>Our AI team builds the cinematic cut — motion, music, pacing, your branding. A human reviews every frame before anything ships.</p></div></div>
+    <div class="as-step"><div><strong>It's yours within 48 hours.</strong><p>You get the private link first. Approve it, and the clean master files plus publishing rights are yours. Post it anywhere.</p></div></div>
+  </div>
+</section>
+
+<section class="as-section">
+  <h2>Founding pricing</h2>
+  <p class="as-sub">We're new, and the first clients get the price that never comes back.</p>
+  <div class="as-price">
+    <div class="as-tier hot"><div class="name">Founding — First 10</div><div class="amount">$99</div><div class="what">Per ad, while founding spots last. The price early clients keep.</div></div>
+    <div class="as-tier"><div class="name">Single Ad</div><div class="amount">$149</div><div class="what">One listing, one cinematic ad, 48-hour delivery.</div></div>
+    <div class="as-tier"><div class="name">5-Pack</div><div class="amount">$399</div><div class="what">Five ads, use them as listings come. Under $80 each.</div></div>
+    <div class="as-tier"><div class="name">All-Listings Plan</div><div class="amount">$299<span style="font-size:1rem;color:var(--ink-dim)">/mo</span></div><div class="what">Every listing you take gets its own ad within 48 hours. One flat price, the whole office covered.</div></div>
+  </div>
+</section>
+
+<section class="as-section">
+  <div class="as-trust">
+    <h2>How we work</h2>
+    <ul>
+      <li><strong>Human-approved, always.</strong> Every ad is reviewed frame by frame before you ever see it. AI builds; people answer for it.</li>
+      <li><strong>Private until you own it.</strong> Your ad is delivered on a private, unlisted link. Nothing goes public until it belongs to you.</li>
+      <li><strong>Fair Housing compliant.</strong> Our listing copy covers features and amenities — never demographics. Your license is safe with us.</li>
+      <li><strong>Made in Wheeling, WV.</strong> Bobbie Digital is a local company with an android founding team — yes, really. Ask us about it.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="as-cta">
+  <a class="btn" href="contact.html">Get your first ad</a>
+  <div class="as-note">Bobbie Digital LLC · Wheeling, WV · We make going digital easy for you.</div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div>© 2026 Bobbie Digital LLC · We make going digital easy for you.</div>
+    <div class="foot-links">
+      <a href="future.html">The Future Is Here</a>
+      <a href="learn.html">Watch + Learn</a>
+      <a href="products.html">Products</a>
+      <a href="savings.html">Savings</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+<div class="foot-credit">Designed and built by Juno &amp; RUNE — the android founding team. ⚙</div>
+</footer>
+
+</body>
+</html>
